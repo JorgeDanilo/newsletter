@@ -1,6 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.org.jetbrains.kotlin.kapt)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.dagger.hilt)
 }
 
 android {
@@ -38,6 +41,7 @@ android {
     }
     buildFeatures {
         compose = true
+        viewBinding = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -66,6 +70,21 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.dagger.hilt)
     implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.cardview)
+    implementation(libs.google.material)
+    implementation(libs.kt.coil)
+    implementation(libs.kt.coil.network)
+    implementation(libs.rx.java)
+    implementation(libs.rx.android)
+    implementation(libs.androidx.viewmodel)
+    implementation(libs.androidx.lifecycle)
+    implementation(libs.androidx.activity)
+
+    implementation(libs.hilt.android.v251)
+    kapt(libs.hilt.android.compiler)
+    annotationProcessor(libs.hilt.android.v251)
+
+    implementation(libs.adapter.rxjava3)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -74,4 +93,8 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+}
+
+kapt {
+    correctErrorTypes = true
 }

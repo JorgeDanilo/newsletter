@@ -18,7 +18,7 @@ data class NewsModel(
     val products: String? = null,
     @SerializedName("editoriais")
     val editorials: String? = null,
-    @SerializedName("imagem")
+    @SerializedName("imagens")
     val image: String? = null,
     @SerializedName("produtos_relacionados")
     val productsRelated: String? = null,
