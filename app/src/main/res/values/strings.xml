@@ -2,4 +2,6 @@
     <string name="app_name">Newsletter</string>
     <string name="title_newsletter">Noticias do dia</string>
     <string name="tv_empty_list">Nada aqui</string>
+    <string name="txt_description">Description</string>
+    <string name="txtTitle">Nome</string>
 </resources>
