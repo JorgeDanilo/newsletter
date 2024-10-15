@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "newsletter"
 include(":app")
- 
+include(":data")
