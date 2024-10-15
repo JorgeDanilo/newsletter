@@ -2,7 +2,7 @@ package com.jd.newsletter.ui.activity.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil3.load
@@ -12,28 +12,15 @@ import com.jd.newsletter.ui.data.model.NewsModel
 import com.jd.newsletter.ui.util.Constants
 import org.json.JSONObject
 
-class NewsletterAdapter : RecyclerView.Adapter<NewsletterAdapter.NewsletterViewHolder>() {
+class NewsletterAdapter : PagingDataAdapter<NewsModel, NewsletterAdapter.NewsletterViewHolder>(
+    COMPARATOR
+) {
 
-    private val _differCallback = object : DiffUtil.ItemCallback<NewsModel>() {
-        override fun areItemsTheSame(oldItem: NewsModel, newItem: NewsModel): Boolean {
-            return oldItem.hashCode() == newItem.hashCode()
-        }
+//    private var _differ = AsyncListDiffer(this, COMPARATOR)
 
-        override fun areContentsTheSame(oldItem: NewsModel, newItem: NewsModel): Boolean {
-            return oldItem.id == newItem.id && oldItem.title == newItem.title &&
-                    oldItem.introduction == newItem.introduction &&
-                    oldItem.datePublication == newItem.datePublication &&
-                    oldItem.productId == newItem.productId &&
-                    oldItem.products == newItem.products &&
-                    oldItem.image == newItem.image
-        }
-    }
-
-    private var _differ = AsyncListDiffer(this, _differCallback)
-
-    var newsletter: List<NewsModel>
-        get() = _differ.currentList
-        set(value) = _differ.submitList(value)
+//    var newsletter: List<NewsModel>
+//        get() = _differ.currentList
+//        set(value) = _differ.submitList(value)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsletterViewHolder {
         return NewsletterViewHolder(
@@ -45,20 +32,33 @@ class NewsletterAdapter : RecyclerView.Adapter<NewsletterAdapter.NewsletterViewH
         )
     }
 
-    override fun getItemCount() = newsletter.size
+//    override fun getItemCount() = newsletter.size
 
     override fun onBindViewHolder(holder: NewsletterViewHolder, position: Int) {
-        val newsLetter = newsletter[position]
-        holder.binding.apply {
-            txtName.text = newsLetter.title.orEmpty()
-            txtDescription.text = newsLetter.introduction.orEmpty()
+        getItem(position)?.let { newsLetterItem ->
+            holder.binding.apply {
+                txtName.text = newsLetterItem.title.orEmpty()
+                txtDescription.text = newsLetterItem.introduction.orEmpty()
 
-            newsLetter.image?.let { imageJson ->
-                JSONObject(imageJson).optString("image_intro").let {
-                    imgNews.load(Constants.BASE_URL_IMAGE + it)
+                newsLetterItem.image?.let { imageJson ->
+                    JSONObject(imageJson).optString("image_intro").let {
+                        imgNews.load(Constants.BASE_URL_IMAGE + it)
+                    }
+                } ?: run {
+                    imgNews.load(R.drawable.imagetest)
                 }
-            } ?: run {
-                imgNews.load(R.drawable.imagetest)
+            }
+        }
+    }
+
+    companion object {
+        private val COMPARATOR = object : DiffUtil.ItemCallback<NewsModel>() {
+            override fun areItemsTheSame(oldItem: NewsModel, newItem: NewsModel): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: NewsModel, newItem: NewsModel): Boolean {
+                return oldItem.id == newItem.id
             }
         }
     }

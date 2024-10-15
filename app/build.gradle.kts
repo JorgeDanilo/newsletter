@@ -84,7 +84,11 @@ dependencies {
     kapt(libs.hilt.android.compiler)
     annotationProcessor(libs.hilt.android.v251)
 
-    implementation(libs.adapter.rxjava3)
+    implementation(libs.adapter.rxjava2)
+
+    implementation (libs.androidx.paging.runtime.ktx)
+    implementation (libs.androidx.paging.rxjava2.ktx)
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
