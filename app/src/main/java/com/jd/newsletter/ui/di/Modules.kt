@@ -1,13 +1,12 @@
 package com.jd.newsletter.ui.di
 
-import com.jd.newsletter.ui.data.remote.GetNewsletterPagingSource
-import com.jd.data.api.ServiceApi
-import com.jd.newsletter.ui.dataSource.NewsletterRemoteDataSource
-import com.jd.newsletter.ui.dataSource.NewsletterRemoteDataSourceImpl
-import com.jd.newsletter.ui.repository.NewsletterRepository
-import com.jd.newsletter.ui.repository.NewsletterRepositoryImpl
-import com.jd.newsletter.ui.useCase.GetNewsLetterUseCase
-import com.jd.newsletter.ui.useCase.UseCaseNewsletter
+import com.jd.data.paging.GetNewsletterPagingSource
+import com.jd.data.repository.dataSource.NewsletterRemoteDataSource
+import com.jd.data.repository.dataSourceImpl.NewsletterRemoteDataSourceImpl
+import com.jd.domain.repository.NewsletterRepository
+import com.jd.data.repository.NewsletterRepositoryImpl
+import com.jd.domain.useCase.GetNewsLetterUseCase
+import com.jd.domain.useCase.UseCaseNewsletter
 import com.jd.newsletter.ui.util.Constants
 import dagger.Module
 import dagger.Provides

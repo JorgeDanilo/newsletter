@@ -12,7 +12,6 @@ pluginManagement {
     }
 }
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
@@ -22,3 +21,4 @@ dependencyResolutionManagement {
 rootProject.name = "newsletter"
 include(":app")
 include(":data")
+include(":domain")
