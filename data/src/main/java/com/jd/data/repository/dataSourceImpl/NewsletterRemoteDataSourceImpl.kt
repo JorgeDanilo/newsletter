@@ -6,13 +6,15 @@ import androidx.paging.PagingData
 import androidx.paging.rxjava2.flowable
 import com.jd.data.repository.dataSource.NewsletterRemoteDataSource
 import com.jd.data.paging.GetNewsletterPagingSource
+import com.jd.domain.model.NewsModel
 import io.reactivex.Flowable
 import javax.inject.Inject
 
 class NewsletterRemoteDataSourceImpl @Inject constructor(
     private val pagingSource: GetNewsletterPagingSource
 ) : NewsletterRemoteDataSource {
-    override fun getNewsLetter(): Flowable<PagingData<com.jd.domain.model.NewsModel>> {
+
+    override fun getNewsLetter(): Flowable<PagingData<NewsModel>> {
         return Pager(
             config = PagingConfig(
                 pageSize = 10,

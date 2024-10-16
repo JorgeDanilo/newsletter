@@ -4,4 +4,5 @@
     <string name="tv_empty_list">Nada aqui</string>
     <string name="txt_description">Description</string>
     <string name="txtTitle">Nome</string>
+    <string name="txtButton">Leia mais</string>
 </resources>

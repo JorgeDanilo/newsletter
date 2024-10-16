@@ -31,7 +31,7 @@ class NewsletterViewModel @Inject constructor(
     @OptIn(ExperimentalCoroutinesApi::class)
     fun getNewsLetter() {
         val observable = useCase
-            .getNewsletter.invoke()
+            .getNewsletter()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .cachedIn(viewModelScope)
