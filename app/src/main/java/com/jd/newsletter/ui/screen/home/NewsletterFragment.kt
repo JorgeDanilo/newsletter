@@ -42,14 +42,12 @@ class NewsletterFragment : Fragment() {
         observer()
     }
 
-    private fun setupRecyclerView() {
-        _binding.rcvNewsletter.apply {
-            this.adapter = mAdapter
-            layoutManager = LinearLayoutManager(context)
-            this.adapter = mAdapter.withLoadStateFooter(
-                footer = LoadingStateAdapter()
-            )
-        }
+    private fun setupRecyclerView() = with(_binding.rcvNewsletter) {
+        this.adapter = mAdapter
+        layoutManager = LinearLayoutManager(context)
+        this.adapter = mAdapter.withLoadStateFooter(
+            footer = LoadingStateAdapter()
+        )
     }
 
     private fun observer() = lifecycleScope.launch {
