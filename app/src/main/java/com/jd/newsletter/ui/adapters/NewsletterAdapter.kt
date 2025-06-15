@@ -31,19 +31,24 @@ class NewsletterAdapter : PagingDataAdapter<NewsModel, NewsletterAdapter.Newslet
             holder.binding.apply {
                 txtName.text = newsLetterItem.title.orEmpty()
                 txtDescription.text = newsLetterItem.introduction.orEmpty()
-
-                newsLetterItem.image?.let { imageJson ->
-                    JSONObject(imageJson).optString("image_intro").let {
-                        imgNews.load(Constants.BASE_URL_IMAGE + it)
-                    }
-                } ?: run {
-                    imgNews.load(R.drawable.imagetest)
-                }
+                loadImage(newsLetterItem)
             }
         }
     }
 
+    private fun NewsItemBinding.loadImage(newsLetterItem: NewsModel) {
+        newsLetterItem.image?.let { imageJson ->
+            JSONObject(imageJson).optString(IMG_INTRO).let {
+                imgNews.load(Constants.BASE_URL_IMAGE + it)
+            }
+        } ?: run {
+            imgNews.load(R.drawable.imagetest)
+        }
+    }
+
     companion object {
+        private const val IMG_INTRO = "image_intro"
+
         private val COMPARATOR = object : DiffUtil.ItemCallback<NewsModel>() {
             override fun areItemsTheSame(oldItem: NewsModel, newItem: NewsModel): Boolean {
                 return oldItem.id == newItem.id
